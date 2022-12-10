@@ -33,7 +33,13 @@ const getCarById = async (req: Request, res: Response, next: NextFunction) => {
 
 const createCar = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const result = await CarService.createCar(req.body, (req as RequestWithUser).user.id);
+    const result = await CarService.createCar(
+      {
+        ...req.body,
+        image: req.file as Express.Multer.File,
+      },
+      (req as RequestWithUser).user.id
+    );
     res.status(201).json({
       status: 201,
       message: "Success",

@@ -1,8 +1,10 @@
 import AppError from "@/utils/error";
 
-import { ICar } from "@dto/car.dto";
+import { ICar, ICarRequest } from "@dto/car.dto";
 
 import CarRepository from "@repositories/car.repository";
+
+import saveImage from "@utils/cloudinary";
 
 const getAllCar = async () => {
   const cars = await CarRepository.getAllCar();
@@ -19,9 +21,12 @@ const getCarById = async (id: string) => {
   return car;
 };
 
-const createCar = async (data: ICar, userId: number) => {
+const createCar = async (data: ICarRequest, userId: number) => {
+  const image: Express.Multer.File = data.image;
+  const cloudinaryImage = (await saveImage(image.path)) as string;
   const result = await CarRepository.createCar({
     ...data,
+    image: cloudinaryImage,
     createdBy: userId,
   });
 

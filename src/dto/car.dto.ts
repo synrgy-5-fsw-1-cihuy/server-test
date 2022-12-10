@@ -1,4 +1,20 @@
+import { Express } from "express";
 import { number, object, string } from "yup";
+
+export interface ICarRequest {
+  name: string;
+  cost: number;
+  capacity: string;
+  image: Express.Multer.File;
+}
+
+export interface ICarRepository {
+  name: string;
+  cost: number;
+  capacity: string;
+  image: string;
+  createdBy: number;
+}
 
 export interface ICar {
   name: string;
@@ -16,7 +32,10 @@ export const carCreateDTO = object({
     name: string().required("Name is required"),
     cost: number().required("Cost is required"),
     capacity: string().required("Capacity is required"),
-    image: string().required("Image is required"),
+  }),
+  file: object({
+    filename: string().required("Image is required"),
+    path: string().required("Image is required"),
   }),
 });
 

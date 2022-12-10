@@ -1,8 +1,8 @@
 import Car from "@database/models/car";
 
-import { ICar } from "@dto/car.dto";
+import { ICar, ICarRepository } from "@dto/car.dto";
 
-const createCar = async (data: ICar) => {
+const createCar = async (data: ICarRepository) => {
   const result = await Car.create({
     ...data,
   });

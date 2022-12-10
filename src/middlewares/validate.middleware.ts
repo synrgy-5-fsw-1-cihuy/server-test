@@ -8,6 +8,7 @@ export const validateSchema = (schema: AnySchema) => async (req: Request, res: R
         body: req.body,
         query: req.query,
         params: req.params,
+        file: req.file,
       },
       {
         abortEarly: false,

@@ -5,6 +5,7 @@ import CarController from "@controllers/car.controller";
 import { carCreateDTO, carUpdateDTO } from "@dto/car.dto";
 
 import { isAuthenticated, isAuthorized } from "@middlewares/auth.middleware";
+import upload from "@middlewares/upload.middleware";
 import { validateSchema } from "@middlewares/validate.middleware";
 
 const CarRouter = express.Router();
@@ -91,7 +92,13 @@ CarRouter.get("/:id", CarController.getCarById);
  *        400:
  *          description: Bad Request / JWT expired
  */
-CarRouter.post("/", isAuthorized(["admin", "superadmin"]), validateSchema(carCreateDTO), CarController.createCar);
+CarRouter.post(
+  "/",
+  isAuthorized(["admin", "superadmin"]),
+  upload.single("image"),
+  validateSchema(carCreateDTO),
+  CarController.createCar
+);
 
 /**
  * @swagger

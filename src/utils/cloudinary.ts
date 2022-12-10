@@ -14,6 +14,7 @@ const saveImage = async (image: string) => {
     } else {
       logger.error("Unexpected error: ", error);
     }
+    return "";
   }
 };
 
