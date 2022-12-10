@@ -5,7 +5,7 @@
 fly.toml
 Dockerfile
 .dockerignore
-
+tmp/uploads/*
 
 ### Node ###
 # Logs
