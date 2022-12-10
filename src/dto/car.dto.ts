@@ -1,25 +1,22 @@
 import { Express } from "express";
 import { number, object, string } from "yup";
 
-export interface ICarRequest {
-  name: string;
-  cost: number;
-  capacity: string;
-  image: Express.Multer.File;
-}
-
-export interface ICarRepository {
-  name: string;
-  cost: number;
-  capacity: string;
-  image: string;
-  createdBy: number;
-}
-
 export interface ICar {
   name: string;
   cost: number;
   capacity: string;
+}
+
+export interface ICarRequest extends ICar {
+  image: Express.Multer.File;
+}
+
+export interface ICarRepository extends ICar {
+  image: string;
+  createdBy: number;
+}
+
+export interface ICarModel extends ICar {
   image: string;
   available: boolean;
   createdBy: number;
